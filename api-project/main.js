@@ -1,13 +1,14 @@
 import "./style.css";
 
-const URL = "https://bestbuyapis.github.io/api-documentation/#overview";
+const villagers = "http://acnhapi.com/v1/villagers/";
 
 async function getData(URL) {
   try {
     const response = await fetch(URL);
-    console.log(response);
+    const data = await response.json();
+    console.log(data);
   } catch (error) {
     console.log(error);
   }
 }
-getData(URL);
+getData(villagers);
