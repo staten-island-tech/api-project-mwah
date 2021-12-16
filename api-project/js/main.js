@@ -1,4 +1,5 @@
 import "../styles/style.css";
+import { hours } from "./hourly";
 
 const villagers = "http://acnhapi.com/v1/villagers/";
 const songs = "http://acnhapi.com/v1/songs/";
@@ -20,7 +21,7 @@ getData(bgm);
 var minutesLabel = document.getElementById("minutes");
 var secondsLabel = document.getElementById("seconds");
 var hoursLabel = document.getElementById("hours");
-var totalSeconds = 0;
+var totalSeconds = 3600;
 setInterval(setTime, 1000);
 
 function setTime() {
@@ -30,6 +31,7 @@ function setTime() {
   hoursLabel.innerHTML = pad(parseInt(totalSeconds / 3600));
 }
 setTime();
+
 function pad(val) {
   var valString = val + "";
   if (valString.length < 2) {
@@ -39,91 +41,7 @@ function pad(val) {
   }
 }
 
-function zero(min, max) {
-  min = Math.ceil(1);
-  max = Math.floor(3);
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-function one(min, max) {
-  min = Math.ceil(4);
-  max = Math.floor(6);
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-function two(min, max) {
-  min = Math.ceil(7);
-  max = Math.floor(9);
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-function three(min, max) {
-  min = Math.ceil(10);
-  max = Math.floor(12);
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-function four(min, max) {
-  min = Math.ceil(13);
-  max = Math.floor(15);
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-function five(min, max) {
-  min = Math.ceil(16);
-  max = Math.floor(18);
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-function six(min, max) {
-  min = Math.ceil(19);
-  max = Math.floor(21);
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-function seven(min, max) {
-  min = Math.ceil(22);
-  max = Math.floor(24);
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-function eight(min, max) {
-  min = Math.ceil(25);
-  max = Math.floor(27);
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-function nine(min, max) {
-  min = Math.ceil(28);
-  max = Math.floor(30);
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-function ten(min, max) {
-  min = Math.ceil(31);
-  max = Math.floor(33);
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-function eleven(min, max) {
-  min = Math.ceil(34);
-  max = Math.floor(36);
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-function twelve(min, max) {
-  min = Math.ceil(37);
-  max = Math.floor(39);
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-function thirteen(min, max) {
-  min = Math.ceil(40);
-  max = Math.floor(42);
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-function updateDaMusic(hour) {
+function insertDaMusic(hour) {
   document.body.insertAdjacentHTML(
     "afterbegin",
     `<audio
@@ -134,4 +52,83 @@ function updateDaMusic(hour) {
 </audio>`
   );
 }
-updateDaMusic(zero());
+
+function updateDaMusic() {
+  if (hoursLabel.innerHTML === "00") {
+    insertDaMusic(hours.zero());
+    console.log("zero");
+  } else if (hoursLabel.innerHTML === "01") {
+    insertDaMusic(hours.one());
+    console.log("one");
+  } else if (hoursLabel.innerHTML === "02") {
+    insertDaMusic(hours.two());
+    console.log("two");
+  } else if (hoursLabel.innerHTML === "03") {
+    insertDaMusic(hours.three());
+    console.log("three");
+  } else if (hoursLabel.innerHTML === "04") {
+    insertDaMusic(hours.four());
+    console.log("four");
+  } else if (hoursLabel.innerHTML === "05") {
+    insertDaMusic(hours.five());
+    console.log("five");
+  } else if (hoursLabel.innerHTML === "06") {
+    insertDaMusic(hours.six());
+    console.log("six");
+  } else if (hoursLabel.innerHTML === "07") {
+    insertDaMusic(hours.seven());
+    console.log("seven");
+  } else if (hoursLabel.innerHTML === "08") {
+    insertDaMusic(hours.eight());
+    console.log("eight");
+  } else if (hoursLabel.innerHTML === "09") {
+    insertDaMusic(hours.nine());
+    console.log("nine");
+  } else if (hoursLabel.innerHTML === "10") {
+    insertDaMusic(hours.ten());
+    console.log("ten");
+  } else if (hoursLabel.innerHTML === "11") {
+    insertDaMusic(hours.eleven());
+    console.log("eleven");
+  } else if (hoursLabel.innerHTML === "12") {
+    insertDaMusic(hours.twelve());
+    console.log("twelve");
+  } else if (hoursLabel.innerHTML === "13") {
+    insertDaMusic(hours.thirteen());
+    console.log("thirteen");
+  } else if (hoursLabel.innerHTML === "14") {
+    insertDaMusic(hours.fourteen());
+    console.log("fourteen");
+  } else if (hoursLabel.innerHTML === "15") {
+    insertDaMusic(hours.fifteen());
+    console.log("fifteen");
+  } else if (hoursLabel.innerHTML === "16") {
+    insertDaMusic(hours.sixteen());
+    console.log("sixteen");
+  } else if (hoursLabel.innerHTML === "17") {
+    insertDaMusic(hours.seventeen());
+    console.log("seventeen");
+  } else if (hoursLabel.innerHTML === "18") {
+    insertDaMusic(hours.eighteen());
+    console.log("eighteen");
+  } else if (hoursLabel.innerHTML === "19") {
+    insertDaMusic(hours.nineteen());
+    console.log("nineteen");
+  } else if (hoursLabel.innerHTML === "20") {
+    insertDaMusic(hours.twenty());
+    console.log("twenty");
+  } else if (hoursLabel.innerHTML === "21") {
+    insertDaMusic(hours.twentyone());
+    console.log("twentyone");
+  } else if (hoursLabel.innerHTML === "22") {
+    insertDaMusic(hours.twentytwo());
+    console.log("twentytwo");
+  } else if (hoursLabel.innerHTML === "23") {
+    insertDaMusic(hours.twentythree());
+    console.log("twentythree");
+  } else {
+    console.log("error");
+  }
+}
+
+updateDaMusic();
