@@ -1,6 +1,5 @@
 import "../styles/style.css";
-import { hours } from "./hourly";
-import { update } from "./update";
+import { updateDaMusic } from "./update";
 
 const villagers = "http://acnhapi.com/v1/villagers/";
 const songs = "http://acnhapi.com/v1/songs/";
@@ -19,10 +18,10 @@ getData(villagers);
 getData(songs);
 getData(bgm);
 
-var minutesLabel = document.getElementById("minutes");
-var secondsLabel = document.getElementById("seconds");
-var hoursLabel = document.getElementById("hours");
-var totalSeconds = 0;
+let minutesLabel = document.getElementById("minutes");
+let secondsLabel = document.getElementById("seconds");
+let hoursLabel = document.getElementById("hours");
+let totalSeconds = 3590;
 setInterval(setTime, 1000);
 
 function setTime() {
@@ -55,3 +54,5 @@ function insertDaMusic(hour) {
 }
 
 updateDaMusic();
+
+export { hoursLabel, insertDaMusic };

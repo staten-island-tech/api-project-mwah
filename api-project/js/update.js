@@ -1,4 +1,5 @@
-import { hoursLabel } from "./main";
+import { hours } from "./hourly";
+import { hoursLabel, insertDaMusic } from "./main";
 
 function updateDaMusic() {
   if (hoursLabel.innerHTML === "00") {
@@ -77,3 +78,5 @@ function updateDaMusic() {
     console.log("error");
   }
 }
+
+export { updateDaMusic };
