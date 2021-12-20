@@ -1,3 +1,4 @@
+//choose random of the three songs for each corresponding hour
 const hours = {
   zero: function zero(min, max) {
     min = Math.ceil(1);
