@@ -10,7 +10,7 @@ const DOMSelectors = {
   hoursLabel: document.getElementById("hours"),
   bgmDiv: document.getElementById("bgm-div"),
 };
-let totalSeconds = 3590;
+let totalSeconds = 78978;
 setInterval(setTime, 1000);
 
 //grab and console log api data
@@ -26,7 +26,7 @@ async function getData(URL) {
 getData(villagers);
 getData(bgm);
 
-//displaying time
+//add 0 if one digit number
 function pad(val) {
   let valString = val + "";
   if (valString.length < 2) {
@@ -35,23 +35,35 @@ function pad(val) {
     return valString;
   }
 }
+//refresh to 0 at 60 minutes
 function minutesPad(val) {
   let valString = val + "";
   if (val >= 60) {
-    return valString - 60;
+    return valString - 60 * Math.floor(totalSeconds / 3600);
   } else {
     return valString;
   }
 }
-function minutesPadMore(val) {
-  minutesPad(val);
-  pad(val);
+//refresh to 0 at 24 hours
+function hoursPad(val) {
+  let valString = val + "";
+  if (val >= 24) {
+    return valString - 24;
+  } else {
+    return valString;
+  }
 }
+
+//displaying time
 function setTime() {
   ++totalSeconds;
   DOMSelectors.secondsLabel.innerHTML = pad(totalSeconds % 60);
-  DOMSelectors.minutesLabel.innerHTML = minutesPad(parseInt(totalSeconds / 60));
-  DOMSelectors.hoursLabel.innerHTML = pad(parseInt(totalSeconds / 3600));
+  DOMSelectors.minutesLabel.innerHTML = pad(
+    minutesPad(parseInt(totalSeconds / 60))
+  );
+  DOMSelectors.hoursLabel.innerHTML = pad(
+    hoursPad(parseInt(totalSeconds / 3600))
+  );
 }
 setTime();
 
