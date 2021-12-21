@@ -10,7 +10,8 @@ const DOMSelectors = {
   hoursLabel: document.getElementById("hours"),
   bgmDiv: document.getElementById("bgm-div"),
 };
-let totalSeconds = 78978;
+let totalSeconds = 86395;
+//let totalSeconds = 17995;
 setInterval(setTime, 1000);
 
 //grab and console log api data
@@ -57,7 +58,6 @@ function hoursPad(val) {
 //displaying time
 function setTime() {
   ++totalSeconds;
-  DOMSelectors.secondsLabel.innerHTML = pad(totalSeconds % 60);
   DOMSelectors.minutesLabel.innerHTML = pad(
     minutesPad(parseInt(totalSeconds / 60))
   );
@@ -83,5 +83,6 @@ function insertDaMusic(hour) {
 
 //randomize music according to set time
 updateDaMusic();
+//setInterval(updateDaMusic, 1000);
 
 export { DOMSelectors, insertDaMusic };
