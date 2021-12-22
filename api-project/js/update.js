@@ -78,12 +78,6 @@ async function updateDaMusic() {
   } else {
     console.log("error");
   }
-  let date = new Date();
-  let minutes = date.getMinutes();
-  console.log(minutes);
-  await sleep((60 - minutes) * 60000);
-
-  updateDaMusic();
 }
 
 export { updateDaMusic };

@@ -11,10 +11,11 @@ const DOMSelectors = {
   hoursLabel: document.getElementById("hours"),
   bgmDiv: document.getElementById("bgm-div"),
 };
-let totalSeconds = 86395;
-//let totalSeconds = 17995;
-setInterval(setTime, 1000);
-
+window.time = {
+  hour: 23,
+  minute: 59,
+  second: 55
+}
 //grab and console log api data
 async function getData(URL) {
   try {
@@ -55,17 +56,43 @@ function hoursPad(val) {
     return valString;
   }
 }
+const sleep = (milliseconds) => {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+};
+
 
 //displaying time
-function setTime() {
-  ++totalSeconds;
-  DOMSelectors.secondsLabel.innerHTML = pad(totalSeconds % 60);
+async function setTime() {
+
+  window.time.second++
+
+  console.log(window.time)
+
+  if (window.time.second>=60) {
+    window.time.minute++
+    window.time.second = 0
+  }
+  if (window.time.minute>=60) {
+    window.time.hour++
+    window.time.minute = 0
+    updateDaMusic()
+    console.log("Updated music")
+  }
+  if (window.time.hour>=24) {
+    window.time.hour = 0
+    window.time.minute = 0
+    window.time.second = 0
+  }
+
+  DOMSelectors.secondsLabel.innerHTML = pad(window.time.second);
   DOMSelectors.minutesLabel.innerHTML = pad(
-    minutesPad(parseInt(totalSeconds / 60))
+    minutesPad(window.time.minute)
   );
   DOMSelectors.hoursLabel.innerHTML = pad(
-    hoursPad(parseInt(totalSeconds / 3600))
+    hoursPad(window.time.hour)
   );
+  await sleep(1000)
+  setTime()
 }
 setTime();
 
@@ -91,10 +118,6 @@ function insertDaMusic(hour) {
 //randomize music according to set time
 //updateDaMusic();
 //setInterval(updateDaMusic, 1000);
-
-const sleep = (milliseconds) => {
-  return new Promise((resolve) => setTimeout(resolve, milliseconds));
-};
 
 async function idk() {
   try {
