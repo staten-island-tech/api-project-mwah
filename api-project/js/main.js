@@ -10,8 +10,9 @@ const DOMSelectors = {
   secondsLabel: document.getElementById("seconds"),
   hoursLabel: document.getElementById("hours"),
   bgmDiv: document.getElementById("bgm-div"),
+  timeForm: document.getElementById("time-form"),
 };
-let totalSeconds = 86395;
+let totalSeconds = DOMSelectors.timeForm;
 //let totalSeconds = 17995;
 setInterval(setTime, 1000);
 
