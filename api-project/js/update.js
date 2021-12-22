@@ -1,4 +1,4 @@
-import { hours } from "./hourly";
+import { hours, sleep } from "./hourly";
 import { DOMSelectors, insertDaMusic } from "./main";
 
 //change music based on time
@@ -78,6 +78,12 @@ async function updateDaMusic() {
   } else {
     console.log("error");
   }
+  let date = new Date()
+  let minutes = date.getMinutes()
+
+  await sleep( (60-minutes) * 60000)
+
+  updateDaMusic()
 }
 
 export { updateDaMusic };

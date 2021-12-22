@@ -1,4 +1,5 @@
 import "../styles/style.css";
+import { hours } from "./hourly";
 import { updateDaMusic } from "./update";
 
 //variables
@@ -69,16 +70,21 @@ setTime();
 
 //insert music display
 function insertDaMusic(hour) {
-  DOMSelectors.bgmDiv.innerHTML = "";
-  DOMSelectors.bgmDiv.insertAdjacentHTML(
-    "afterbegin",
-    `<audio
-  controls autoplay loop
-  src="https://acnhapi.com/v1/hourly/${hour}">
-      Your browser does not support the
-      <code>audio</code> element.
-</audio>`
-  );
+  if (DOMSelectors.bgmDiv.innerHTML == ""){
+      DOMSelectors.bgmDiv.insertAdjacentHTML(
+        "afterbegin",
+        `<audio
+      controls autoplay loop
+      src="https://acnhapi.com/v1/hourly/${hour}">
+          Your browser does not support the
+          <code>audio</code> element.
+    </audio>`
+      );
+  }else{
+    console.log(DOMSelectors.bgmDiv.children[0].src)
+    console.log("Changed to: " + hour)
+    DOMSelectors.bgmDiv.children[0].src = `https://acnhapi.com/v1/hourly/${hour}`
+  }
 }
 
 //randomize music according to set time
