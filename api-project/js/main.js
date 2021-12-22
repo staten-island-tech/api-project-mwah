@@ -89,7 +89,23 @@ function insertDaMusic(hour) {
 }
 
 //randomize music according to set time
-updateDaMusic();
+//updateDaMusic();
 //setInterval(updateDaMusic, 1000);
+
+const sleep = (milliseconds) => {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+};
+
+async function idk() {
+  try {
+    let date = new Date();
+    let minutes = date.getMinutes();
+    await sleep((60 - minutes) * 60000);
+    updateDaMusic();
+  } catch (error) {
+    console.log(error);
+  }
+}
+idk();
 
 export { DOMSelectors, insertDaMusic };
