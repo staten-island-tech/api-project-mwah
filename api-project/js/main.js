@@ -59,6 +59,7 @@ function hoursPad(val) {
 //displaying time
 function setTime() {
   ++totalSeconds;
+  DOMSelectors.secondsLabel.innerHTML = pad(totalSeconds % 60);
   DOMSelectors.minutesLabel.innerHTML = pad(
     minutesPad(parseInt(totalSeconds / 60))
   );
@@ -70,20 +71,20 @@ setTime();
 
 //insert music display
 function insertDaMusic(hour) {
-  if (DOMSelectors.bgmDiv.innerHTML == ""){
-      DOMSelectors.bgmDiv.insertAdjacentHTML(
-        "afterbegin",
-        `<audio
+  if (DOMSelectors.bgmDiv.innerHTML == "") {
+    DOMSelectors.bgmDiv.insertAdjacentHTML(
+      "afterbegin",
+      `<audio
       controls autoplay loop
       src="https://acnhapi.com/v1/hourly/${hour}">
           Your browser does not support the
           <code>audio</code> element.
     </audio>`
-      );
-  }else{
-    console.log(DOMSelectors.bgmDiv.children[0].src)
-    console.log("Changed to: " + hour)
-    DOMSelectors.bgmDiv.children[0].src = `https://acnhapi.com/v1/hourly/${hour}`
+    );
+  } else {
+    console.log(DOMSelectors.bgmDiv.children[0].src);
+    console.log("Changed to: " + hour);
+    DOMSelectors.bgmDiv.children[0].src = `https://acnhapi.com/v1/hourly/${hour}`;
   }
 }
 
