@@ -2,7 +2,7 @@ import { hours } from "./hourly";
 import { DOMSelectors, insertDaMusic } from "./main";
 
 //change music based on time
-function updateDaMusic() {
+async function updateDaMusic() {
   if (DOMSelectors.hoursLabel.innerHTML === "00") {
     insertDaMusic(hours.zero());
     console.log("zero");
