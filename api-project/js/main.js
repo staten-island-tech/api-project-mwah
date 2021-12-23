@@ -1,5 +1,4 @@
 import "../styles/style.css";
-import { hours } from "./hourly";
 import { updateDaMusic } from "./update";
 
 //variables
@@ -12,10 +11,10 @@ const DOMSelectors = {
   bgmDiv: document.getElementById("bgm-div"),
 };
 window.time = {
-  hour: 23,
+  hour: 1,
   minute: 59,
-  second: 55
-}
+  second: 45,
+};
 //grab and console log api data
 async function getData(URL) {
   try {
@@ -60,39 +59,33 @@ const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
 
-
 //displaying time
 async function setTime() {
+  window.time.second++;
 
-  window.time.second++
+  console.log(window.time);
 
-  console.log(window.time)
-
-  if (window.time.second>=60) {
-    window.time.minute++
-    window.time.second = 0
+  if (window.time.second >= 60) {
+    window.time.minute++;
+    window.time.second = 0;
   }
-  if (window.time.minute>=60) {
-    window.time.hour++
-    window.time.minute = 0
-    updateDaMusic()
-    console.log("Updated music")
+  if (window.time.minute >= 60) {
+    window.time.hour++;
+    window.time.minute = 0;
+    updateDaMusic();
+    console.log("Updated music");
   }
-  if (window.time.hour>=24) {
-    window.time.hour = 0
-    window.time.minute = 0
-    window.time.second = 0
+  if (window.time.hour >= 24) {
+    window.time.hour = 0;
+    window.time.minute = 0;
+    window.time.second = 0;
   }
 
   DOMSelectors.secondsLabel.innerHTML = pad(window.time.second);
-  DOMSelectors.minutesLabel.innerHTML = pad(
-    minutesPad(window.time.minute)
-  );
-  DOMSelectors.hoursLabel.innerHTML = pad(
-    hoursPad(window.time.hour)
-  );
-  await sleep(1000)
-  setTime()
+  DOMSelectors.minutesLabel.innerHTML = pad(minutesPad(window.time.minute));
+  DOMSelectors.hoursLabel.innerHTML = pad(hoursPad(window.time.hour));
+  await sleep(1000);
+  setTime();
 }
 setTime();
 
@@ -118,8 +111,8 @@ function insertDaMusic(hour) {
 //randomize music according to set time
 //updateDaMusic();
 //setInterval(updateDaMusic, 1000);
-
-async function idk() {
+async function checkTime() {
+  updateDaMusic();
   try {
     let date = new Date();
     let minutes = date.getMinutes();
@@ -129,6 +122,6 @@ async function idk() {
     console.log(error);
   }
 }
-idk();
+checkTime();
 
 export { DOMSelectors, insertDaMusic };
