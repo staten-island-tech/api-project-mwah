@@ -16,6 +16,22 @@ window.time = {
   minute: 59,
   second: 45,
 };
+
+//setting time
+function setTime() {
+  re = /^\d{1,2}:\d{2}([ap]m)?$/;
+
+  if (form.starttime.value != "" && !form.starttime.value.match(re)) {
+    alert("Invalid time format: " + form.starttime.value);
+    form.starttime.focus();
+    return false;
+  } else {
+    alert("All input fields have been validated!");
+    return true;
+    window.time.hour;
+  }
+}
+
 //grab and console log api data
 async function getData(URL) {
   try {
@@ -60,8 +76,8 @@ const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
 
-//displaying time
-async function setTime() {
+//displaying live-updated time
+async function displayTime() {
   window.time.second++;
 
   console.log(window.time);
@@ -86,9 +102,9 @@ async function setTime() {
   DOMSelectors.minutesLabel.innerHTML = pad(minutesPad(window.time.minute));
   DOMSelectors.hoursLabel.innerHTML = pad(hoursPad(window.time.hour));
   await sleep(1000);
-  setTime();
+  displayTime();
 }
-setTime();
+displayTime();
 
 //insert music display
 function insertDaMusic(hour) {
