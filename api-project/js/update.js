@@ -1,15 +1,15 @@
-import { hours, sleep } from "./hourly";
+import { hours } from "./hourly";
 import { DOMSelectors, insertDaMusic } from "./main";
 
 //change music based on time
 async function updateDaMusic() {
-  if (DOMSelectors.hoursLabel.innerHTML === "00") {
+  if (window.time.hour === 0) {
     insertDaMusic(hours.zero());
     console.log("zero");
-  } else if (DOMSelectors.hoursLabel.innerHTML === "01") {
+  } else if (window.time.hour === 1) {
     insertDaMusic(hours.one());
     console.log("one");
-  } else if (DOMSelectors.hoursLabel.innerHTML === "02") {
+  } else if (window.time.hour === 2) {
     insertDaMusic(hours.two());
     console.log("two");
   } else if (DOMSelectors.hoursLabel.innerHTML === "03") {
@@ -78,12 +78,6 @@ async function updateDaMusic() {
   } else {
     console.log("error");
   }
-  let date = new Date();
-  let minutes = date.getMinutes();
-  console.log(minutes);
-  await sleep((60 - minutes) * 60000);
-
-  updateDaMusic();
 }
 
 export { updateDaMusic };
