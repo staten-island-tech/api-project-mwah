@@ -9,28 +9,11 @@ const DOMSelectors = {
   secondsLabel: document.getElementById("seconds"),
   hoursLabel: document.getElementById("hours"),
   bgmDiv: document.getElementById("bgm-div"),
-  timeForm: document.getElementById("time-form"),
+  form: document.getElementById("time-form"),
+  newHour: document.getElementById("hours-input"),
+  newMinute: document.getElementById("minutes-input"),
+  button: document.getElementById("form-btn"),
 };
-window.time = {
-  hour: 1,
-  minute: 59,
-  second: 45,
-};
-
-//setting time
-function setTime() {
-  re = /^\d{1,2}:\d{2}([ap]m)?$/;
-
-  if (form.starttime.value != "" && !form.starttime.value.match(re)) {
-    alert("Invalid time format: " + form.starttime.value);
-    form.starttime.focus();
-    return false;
-  } else {
-    alert("All input fields have been validated!");
-    return true;
-    window.time.hour;
-  }
-}
 
 //grab and console log api data
 async function getData(URL) {
@@ -44,6 +27,32 @@ async function getData(URL) {
 }
 getData(villagers);
 getData(bgm);
+
+DOMSelectors.button.addEventListener("click", function (e) {
+  e.preventDefault();
+});
+window.time = {
+  hour: DOMSelectors.newHour.value,
+  minute: DOMSelectors.newMinute.value,
+  second: 0,
+};
+/* DOMSelectors.form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  let re = /^\d{1,2}:\d{2}([ap]m)?$/;
+
+  if (DOMSelectors.input.value != "" && !DOMSelectors.input.value.match(re)) {
+    console.log("invalid input");
+    DOMSelectors.input.focus();
+    return false;
+  } else if (DOMSelectors.input.value.match(re)) {
+    console.log("pretty valid input");
+    console.log(DOMSelectors.input.value);
+    newTime = DOMSelectors.input.value;
+    console.log(hour);
+    DOMSelectors.input.focus();
+    return true;
+  }
+}); */
 
 //add 0 if one digit number
 function pad(val) {
@@ -79,8 +88,6 @@ const sleep = (milliseconds) => {
 //displaying live-updated time
 async function displayTime() {
   window.time.second++;
-
-  console.log(window.time);
 
   if (window.time.second >= 60) {
     window.time.minute++;
@@ -125,9 +132,7 @@ function insertDaMusic(hour) {
   }
 }
 
-//randomize music according to set time
-//updateDaMusic();
-//setInterval(updateDaMusic, 1000);
+//check for changes in hour and change music accordingly
 async function checkTime() {
   updateDaMusic();
   try {

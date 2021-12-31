@@ -11,10 +11,14 @@
     <div id="time-div">
       <span id="hours"></span>:<span id="minutes"></span>:<span id="seconds"></span>
     </div>
-    <form id="form">
-      <label for="time-form">Set Time:</label>
-      <input type="text" id="time-input" name="time-form" >
+
+    <form id="time-form">
+      <label for="hours">Hours:</label>
+      <input type="text" id="hours-input" name="hours" >
+      <label for="minutes">Minutes:</label>
+      <input type="text" id="minutes-input" name="minutes" >
     </form>
+    <button type="submit" form="time-form" id="form-btn">Set Time</button>
     <script type="module" src="./js/main.js"></script>
   </body>
 </html>
