@@ -6,7 +6,7 @@ async function updateDaMusic() {
   if (window.time.hour === 0 || window.time.hour === 24) {
     insertDaMusic(hours.zero());
     document.getElementById("display-img-container").style["background-image"] =
-      'url("/Night.jpg")';
+      'url("/night-time.jpg")';
     console.log("zero");
   } else if (window.time.hour === 1) {
     insertDaMusic(hours.one());
