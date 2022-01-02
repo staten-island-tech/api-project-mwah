@@ -136,7 +136,9 @@ function insertDaMusic(hour) {
       "afterbegin",
       `<div id = "display-img-text">
       <div id="display-img">
-        <div id = "display-img-container"></div>
+        <div id = "display-img-container">
+        <img src = "/night.jpg" alt="">
+        </div>
       </div>
       <div id="display-text">
         <div id="display-text-container">
