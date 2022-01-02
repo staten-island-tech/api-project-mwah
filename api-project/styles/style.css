@@ -123,7 +123,7 @@ input {
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 715px) {
   #display-div {
     width: 75%;
   }
@@ -141,7 +141,7 @@ input {
   }
 }
 
-@media screen and (max-width: 515px) {
+@media screen and (max-width: 500px) {
   #display-img-text {
     height: 15rem;
   }
