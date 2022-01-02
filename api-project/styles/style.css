@@ -141,7 +141,7 @@ input {
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 515px) {
   #display-img-text {
     height: 15rem;
   }
