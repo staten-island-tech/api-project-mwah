@@ -123,12 +123,6 @@ input {
   }
 }
 
-@media screen and (max-width: 950px) {
-  #display-div {
-    width: 70%;
-  }
-}
-
 @media screen and (max-width: 700px) {
   #display-div {
     width: 75%;
