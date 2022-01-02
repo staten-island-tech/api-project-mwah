@@ -117,6 +117,11 @@ input {
   color: rgb(255, 255, 255);
 }
 
+#info {
+  margin-right: 3rem;
+  margin-left: 3rem;
+}
+
 @media screen and (max-width: 1300px) {
   #display-div {
     width: 60%;
