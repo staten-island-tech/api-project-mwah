@@ -8,6 +8,8 @@ const DOMSelectors = {
   timeDiv: document.getElementById("time-div"),
   form: document.getElementById("time-form"),
   input: document.getElementById("time-form-input"),
+  purple: document.getElementById("purple"),
+  blue: document.getElementById("blue"),
 };
 let arr = {};
 window.time = {
@@ -189,5 +191,16 @@ async function checkTime() {
     console.log(error);
   }
 }
+
+//button themes
+DOMSelectors.purple.addEventListener("click", function () {
+  document.body.style["background-image"] = "";
+  document.body.style["background-image"] = 'url("/pattern2.png")';
+});
+
+DOMSelectors.blue.addEventListener("click", function () {
+  document.body.style["background-image"] = "";
+  document.body.style["background-image"] = 'url("/pattern.jpg")';
+});
 
 export { insertDaMusic };

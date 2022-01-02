@@ -9,8 +9,33 @@ body,
 }
 
 body {
-  background-image: url(/pattern.jpg);
+  background-image: url(/pattern2.png);
   text-align: center;
+}
+
+#themes {
+  text-align: left;
+  margin-left: 1rem;
+  margin-top: 1.5rem;
+}
+
+.theme-btn {
+  background-color: rgba(49, 49, 49, 0.384);
+  width: 8rem;
+  height: 3rem;
+  border-radius: 1.5rem;
+  border: 0.2rem solid rgba(0, 0, 0, 0.295);
+  color: rgb(255, 255, 255);
+  font-size: 1.5rem;
+  margin-left: 1rem;
+  margin-right: 0.5rem;
+  transition: all 0.3s;
+}
+
+.theme-btn:hover {
+  transform: scale(1.12);
+  background-color: rgba(49, 49, 49, 0.521);
+  border: 0.2rem solid rgba(0, 0, 0, 0.747);
 }
 
 label {
@@ -21,6 +46,23 @@ label,
 p,
 input {
   font-size: 1.8rem;
+}
+
+input {
+  text-align: center;
+  border-radius: 1.5rem;
+  background-color: rgba(49, 49, 49, 0.384);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  border: 0.2rem solid rgba(0, 0, 0, 0.295);
+  color: rgb(255, 255, 255);
+}
+
+#info {
+  margin-right: 3rem;
+  margin-left: 3rem;
 }
 
 #display {
@@ -103,23 +145,6 @@ input {
 
 .time-labels {
   font-size: 3rem;
-}
-
-input {
-  text-align: center;
-  border-radius: 1.5rem;
-  background-color: rgba(49, 49, 49, 0.384);
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  margin-top: 0.5rem;
-  margin-bottom: 1.5rem;
-  border: 0.2rem solid rgba(0, 0, 0, 0.295);
-  color: rgb(255, 255, 255);
-}
-
-#info {
-  margin-right: 3rem;
-  margin-left: 3rem;
 }
 
 @media screen and (max-width: 1300px) {
