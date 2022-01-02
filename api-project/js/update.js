@@ -1,80 +1,130 @@
 import { hours } from "./hourly";
-import { DOMSelectors, insertDaMusic } from "./main";
+import { insertDaMusic } from "./main";
 
 //change music based on time
 async function updateDaMusic() {
-  if (window.time.hour === 0) {
+  if (window.time.hour === 0 || window.time.hour === 24) {
     insertDaMusic(hours.zero());
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/night.jpg")';
     console.log("zero");
   } else if (window.time.hour === 1) {
     insertDaMusic(hours.one());
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/night.jpg")';
     console.log("one");
   } else if (window.time.hour === 2) {
     insertDaMusic(hours.two());
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/night.jpg")';
     console.log("two");
-  } else if (DOMSelectors.hoursLabel.innerHTML === "03") {
+  } else if (window.time.hour === 3) {
     insertDaMusic(hours.three());
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/night.jpg")';
     console.log("three");
-  } else if (DOMSelectors.hoursLabel.innerHTML === "04") {
+  } else if (window.time.hour === 4) {
     insertDaMusic(hours.four());
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/night.jpg")';
     console.log("four");
-  } else if (DOMSelectors.hoursLabel.innerHTML === "05") {
+  } else if (window.time.hour === 5) {
     insertDaMusic(hours.five());
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/night.jpg")';
     console.log("five");
-  } else if (DOMSelectors.hoursLabel.innerHTML === "06") {
+  } else if (window.time.hour === 6) {
     insertDaMusic(hours.six());
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/sunrise.jpg")';
     console.log("six");
-  } else if (DOMSelectors.hoursLabel.innerHTML === "07") {
+  } else if (window.time.hour === 7) {
     insertDaMusic(hours.seven());
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/sunrise.jpg")';
     console.log("seven");
-  } else if (DOMSelectors.hoursLabel.innerHTML === "08") {
+  } else if (window.time.hour === 8) {
     insertDaMusic(hours.eight());
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/morning.jpg")';
     console.log("eight");
-  } else if (DOMSelectors.hoursLabel.innerHTML === "09") {
+  } else if (window.time.hour === 9) {
     insertDaMusic(hours.nine());
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/morning.jpg")';
     console.log("nine");
-  } else if (DOMSelectors.hoursLabel.innerHTML === "10") {
+  } else if (window.time.hour === 10) {
     insertDaMusic(hours.ten());
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/morning.jpg")';
     console.log("ten");
-  } else if (DOMSelectors.hoursLabel.innerHTML === "11") {
+  } else if (window.time.hour === 11) {
     insertDaMusic(hours.eleven());
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/afternoon.jpg")';
     console.log("eleven");
-  } else if (DOMSelectors.hoursLabel.innerHTML === "12") {
+  } else if (window.time.hour === 12) {
     insertDaMusic(hours.twelve());
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/afternoon.jpg")';
     console.log("twelve");
-  } else if (DOMSelectors.hoursLabel.innerHTML === "13") {
+  } else if (window.time.hour === 13) {
     insertDaMusic(hours.thirteen());
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/afternoon.jpg")';
     console.log("thirteen");
-  } else if (DOMSelectors.hoursLabel.innerHTML === "14") {
+  } else if (window.time.hour === 14) {
     insertDaMusic(hours.fourteen());
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/late-noon.png")';
     console.log("fourteen");
-  } else if (DOMSelectors.hoursLabel.innerHTML === "15") {
+  } else if (window.time.hour === 15) {
     insertDaMusic(hours.fifteen());
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/late-noon.png")';
     console.log("fifteen");
-  } else if (DOMSelectors.hoursLabel.innerHTML === "16") {
+  } else if (window.time.hour === 16) {
     insertDaMusic(hours.sixteen());
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/early-evening.jpg")';
     console.log("sixteen");
-  } else if (DOMSelectors.hoursLabel.innerHTML === "17") {
+  } else if (window.time.hour === 17) {
     insertDaMusic(hours.seventeen());
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/early-evening.jpg")';
     console.log("seventeen");
-  } else if (DOMSelectors.hoursLabel.innerHTML === "18") {
+  } else if (window.time.hour === 18) {
     insertDaMusic(hours.eighteen());
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/sunset.jpg")';
     console.log("eighteen");
-  } else if (DOMSelectors.hoursLabel.innerHTML === "19") {
+  } else if (window.time.hour === 19) {
     insertDaMusic(hours.nineteen());
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/sunset.jpg")';
     console.log("nineteen");
-  } else if (DOMSelectors.hoursLabel.innerHTML === "20") {
+  } else if (window.time.hour === 20) {
     insertDaMusic(hours.twenty());
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/evening.jpg")';
     console.log("twenty");
-  } else if (DOMSelectors.hoursLabel.innerHTML === "21") {
+  } else if (window.time.hour === 21) {
     insertDaMusic(hours.twentyone());
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/evening.jpg")';
     console.log("twentyone");
-  } else if (DOMSelectors.hoursLabel.innerHTML === "22") {
+  } else if (window.time.hour === 22) {
     insertDaMusic(hours.twentytwo());
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/evening.jpg")';
     console.log("twentytwo");
-  } else if (DOMSelectors.hoursLabel.innerHTML === "23") {
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/night.jpg")';
+  } else if (window.time.hour === 23) {
     insertDaMusic(hours.twentythree());
     console.log("twentythree");
+    document.getElementById("display-img-container").style["background-image"] =
+      'url("../Public/night.jpg")';
   } else {
     console.log("error");
   }

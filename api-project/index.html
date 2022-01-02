@@ -5,20 +5,27 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
   </head>
   <body> 
-    <div id = "bgm-div"></div>
-    <div id="time-div">
-      <span id="hours"></span>:<span id="minutes"></span>:<span id="seconds"></span>
-    </div>
-
-    <form id="time-form">
-      <label for="hours">Hours:</label>
-      <input type="text" id="hours-input" name="hours" >
-      <label for="minutes">Minutes:</label>
-      <input type="text" id="minutes-input" name="minutes" >
-    </form>
-    <button type="submit" form="time-form" id="form-btn">Set Time</button>
+    <section id="display">
+      <div id = "display-div">
+        
+      </div> 
+    </section>
+    <section id="time">
+      <div id = "time-div">
+        
+      </div>
+      <form id="time-form">
+        <label for="time-form-input" id="time-form-label">Set Time</label>
+        <input type="text" name="time-input" id="time-form-input">
+      </form>
+      <p id="info">Please use 24-hour hh:mm time format</p>
+    </section>
+    
     <script type="module" src="./js/main.js"></script>
   </body>
 </html>
