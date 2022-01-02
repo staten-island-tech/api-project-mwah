@@ -141,7 +141,8 @@ function insertDaMusic(hour) {
       </div>
       <div id="display-text">
         <div id="display-text-container">
-          <span id="text-main">Now playing: </span> <span id="text-sub">${currentFile[0]["file-name"]}</span>
+          <p id="text-main">Now playing: </p> 
+          <p id="text-sub">${currentFile[0]["file-name"]}</p>
         </div>
       </div>
     </div>
@@ -162,7 +163,8 @@ function insertDaMusic(hour) {
       </div>
       <div id="display-text">
         <div id="display-text-container">
-          <span id="text-main">Now playing: </span> <span id="text-sub">${currentFile[0]["file-name"]}</span>
+          <p id="text-main">Now playing: </p> 
+          <p id="text-sub">${currentFile[0]["file-name"]}</p>
         </div>
       </div>
     </div>
