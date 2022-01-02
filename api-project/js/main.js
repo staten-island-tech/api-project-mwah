@@ -47,7 +47,7 @@ DOMSelectors.form.addEventListener("submit", (e) => {
     let newHour = regs[1];
     let newMinute = regs[2];
 
-    console.log("pretty valid input");
+    console.log(`pretty valid input: ${DOMSelectors.input.value}`);
 
     window.time = {
       hour: parseInt(newHour),

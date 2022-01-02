@@ -6,7 +6,7 @@ async function updateDaMusic() {
   if (window.time.hour === 0 || window.time.hour === 24) {
     insertDaMusic(hours.zero());
     document.getElementById("display-img-container").style["background-image"] =
-      'url("../public/night.jpg")';
+      'url("/night.jpg")';
     console.log("zero");
   } else if (window.time.hour === 1) {
     insertDaMusic(hours.one());
@@ -26,12 +26,12 @@ async function updateDaMusic() {
   } else if (window.time.hour === 4) {
     insertDaMusic(hours.four());
     document.getElementById("display-img-container").style["background-image"] =
-      'url("../public/night.jpg")';
+      'url("/night.jpg")';
     console.log("four");
   } else if (window.time.hour === 5) {
     insertDaMusic(hours.five());
     document.getElementById("display-img-container").style["background-image"] =
-      'url("../public/night.jpg")';
+      'url("/night.jpg")';
     console.log("five");
   } else if (window.time.hour === 6) {
     insertDaMusic(hours.six());
@@ -46,7 +46,7 @@ async function updateDaMusic() {
   } else if (window.time.hour === 8) {
     insertDaMusic(hours.eight());
     document.getElementById("display-img-container").style["background-image"] =
-      'url("../public/Morning.jpg")';
+      'url("/Morning.jpg")';
     console.log("eight");
   } else if (window.time.hour === 9) {
     insertDaMusic(hours.nine());
@@ -96,12 +96,12 @@ async function updateDaMusic() {
   } else if (window.time.hour === 18) {
     insertDaMusic(hours.eighteen());
     document.getElementById("display-img-container").style["background-image"] =
-      'url("../public/sunset.jpg")';
+      'url("/sunset.jpg")';
     console.log("eighteen");
   } else if (window.time.hour === 19) {
     insertDaMusic(hours.nineteen());
     document.getElementById("display-img-container").style["background-image"] =
-      'url("../public/sunset.jpg")';
+      'url("/sunset.jpg")';
     console.log("nineteen");
   } else if (window.time.hour === 20) {
     insertDaMusic(hours.twenty());

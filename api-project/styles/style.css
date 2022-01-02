@@ -9,7 +9,7 @@ body,
 }
 
 body {
-  background-image: url(../Public/bg-pattern.jpg);
+  background-image: url(/pattern.jpg);
   text-align: center;
 }
 
