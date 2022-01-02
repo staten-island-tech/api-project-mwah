@@ -62,6 +62,7 @@ input {
   background-position: center;
   background-size: cover;
   border-radius: 1rem;
+  background-image: url(/night.jpg);
 }
 
 #display-text {
