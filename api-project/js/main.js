@@ -99,6 +99,7 @@ const sleep = (milliseconds) => {
 
 //displaying live-updated time
 async function displayTime() {
+  console.log("hey");
   window.time.second++;
 
   if (window.time.second >= 60) {
@@ -126,7 +127,9 @@ async function displayTime() {
   labels.secondsLabel.innerHTML = pad(window.time.second);
   labels.minutesLabel.innerHTML = pad(minutesPad(window.time.minute));
   labels.hoursLabel.innerHTML = pad(hoursPad(window.time.hour));
+
   await sleep(1000);
+
   displayTime();
 }
 
