@@ -18,6 +18,7 @@ window.time = {
   second: "",
 };
 
+// MAKE A VARIABLE EMPTY, START OF FORM SUBMIT MAKE FALSE OR SUM, ACCEPTED VALUE MAKE TRUE, WHILE LOOP WHEN TRUE
 //grab and console log api data
 async function getData(URL) {
   try {
@@ -36,7 +37,6 @@ getData(bgm);
 DOMSelectors.form.addEventListener("submit", (e) => {
   e.preventDefault();
   let re = /^(\d{1,2}):(\d{2})?$/;
-
   if (DOMSelectors.input.value != "" && !DOMSelectors.input.value.match(re)) {
     console.log("invalid input");
     alert("Invalid time format. Please use hh:mm");
@@ -62,6 +62,7 @@ DOMSelectors.form.addEventListener("submit", (e) => {
     checkTime();
   }
 
+  console.log("");
   DOMSelectors.input.value = "";
 });
 
@@ -129,8 +130,6 @@ async function displayTime() {
   labels.hoursLabel.innerHTML = pad(hoursPad(window.time.hour));
 
   await sleep(1000);
-
-  displayTime();
 }
 
 //insert music display HTML
