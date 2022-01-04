@@ -11,7 +11,8 @@ const DOMSelectors = {
   purple: document.getElementById("purple"),
   blue: document.getElementById("blue"),
 };
-let arr = {};
+
+let holder = {};
 window.time = {
   hour: "",
   minute: "",
@@ -24,9 +25,9 @@ async function getData(URL) {
   try {
     const response = await fetch(URL);
     const data = await response.json();
-    arr = Object.keys(data).map((key) => data[key]);
-    console.log(arr);
-    return arr;
+    holder.arr = Object.keys(data).map((key) => data[key]);
+    console.log(holder.arr);
+    return holder.arr;
   } catch (error) {
     console.log(error);
   }
@@ -134,7 +135,7 @@ async function displayTime() {
 
 //insert music display HTML
 function insertDaMusic(hour) {
-  const currentFile = arr.filter((song) => song.id === hour);
+  const currentFile = holder.arr.filter((song) => song.id === hour);
   if (DOMSelectors.displayDiv.innerHTML == "") {
     DOMSelectors.displayDiv.insertAdjacentHTML(
       "afterbegin",
