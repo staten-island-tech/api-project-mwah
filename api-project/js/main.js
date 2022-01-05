@@ -12,14 +12,15 @@ const DOMSelectors = {
   blue: document.getElementById("blue"),
 };
 
-let holder = {};
+let holder = {
+  switch: false,
+};
 window.time = {
   hour: "",
   minute: "",
   second: "",
 };
 
-// MAKE A VARIABLE EMPTY, START OF FORM SUBMIT MAKE FALSE OR SUM, ACCEPTED VALUE MAKE TRUE, WHILE LOOP WHEN TRUE
 //grab and console log api data
 async function getData(URL) {
   try {
@@ -35,37 +36,38 @@ async function getData(URL) {
 getData(bgm);
 
 //when submit form - check valid format, set time, run display and check, clear input field
-DOMSelectors.form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  let re = /^(\d{1,2}):(\d{2})?$/;
-  if (DOMSelectors.input.value != "" && !DOMSelectors.input.value.match(re)) {
-    console.log("invalid input");
-    alert("Invalid time format. Please use hh:mm");
-  } else if (DOMSelectors.input.value.match(re)) {
-    DOMSelectors.timeDiv.innerHTML =
-      '<span class="time-labels" id="hours"></span>:<span class="time-labels" id="minutes"></span>:<span class="time-labels" id="seconds"></span>';
+function submit() {
+  DOMSelectors.form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    holder.switch = false;
+    let re = /^(\d{1,2}):(\d{2})?$/;
+    if (DOMSelectors.input.value != "" && !DOMSelectors.input.value.match(re)) {
+      console.log("invalid input");
+      alert("Invalid time format. Please use hh:mm");
+    } else if (DOMSelectors.input.value.match(re)) {
+      DOMSelectors.timeDiv.innerHTML =
+        '<span class="time-labels" id="hours"></span>:<span class="time-labels" id="minutes"></span>:<span class="time-labels" id="seconds"></span>';
 
-    let regs = DOMSelectors.input.value.match(re);
-    let newHour = regs[1];
-    let newMinute = regs[2];
+      let regs = DOMSelectors.input.value.match(re);
+      let newHour = regs[1];
+      let newMinute = regs[2];
+      holder.switch = true;
+      console.log(`pretty valid input: ${DOMSelectors.input.value}`);
 
-    console.log(`pretty valid input: ${DOMSelectors.input.value}`);
+      window.time = {
+        hour: parseInt(newHour),
+        minute: parseInt(newMinute),
+        second: 0,
+      };
 
-    window.time = {
-      hour: parseInt(newHour),
-      minute: parseInt(newMinute),
-      second: 0,
-    };
+      console.log(window.time);
 
-    console.log(window.time);
+      checkTime();
+    }
 
-    displayTime();
-    checkTime();
-  }
-
-  console.log("");
-  DOMSelectors.input.value = "";
-});
+    DOMSelectors.input.value = "";
+  });
+}
 
 //add 0 if one digit number
 function pad(val) {
@@ -132,6 +134,15 @@ async function displayTime() {
 
   await sleep(1000);
 }
+
+//loop display
+function updateDisplay() {
+  while ((holder.switch = true)) {
+    displayTime();
+    submit();
+  }
+}
+updateDisplay();
 
 //insert music display HTML
 function insertDaMusic(hour) {
