@@ -12,9 +12,7 @@ const DOMSelectors = {
   blue: document.getElementById("blue"),
 };
 
-let holder = {
-  switch: false,
-};
+let holder = {};
 window.time = {
   hour: "",
   minute: "",
@@ -36,38 +34,32 @@ async function getData(URL) {
 getData(bgm);
 
 //when submit form - check valid format, set time, run display and check, clear input field
-function submit() {
-  DOMSelectors.form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    holder.switch = false;
-    let re = /^(\d{1,2}):(\d{2})?$/;
-    if (DOMSelectors.input.value != "" && !DOMSelectors.input.value.match(re)) {
-      console.log("invalid input");
-      alert("Invalid time format. Please use hh:mm");
-    } else if (DOMSelectors.input.value.match(re)) {
-      DOMSelectors.timeDiv.innerHTML =
-        '<span class="time-labels" id="hours"></span>:<span class="time-labels" id="minutes"></span>:<span class="time-labels" id="seconds"></span>';
+DOMSelectors.form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  let re = /^(\d{1,2}):(\d{2})?$/;
+  if (DOMSelectors.input.value != "" && !DOMSelectors.input.value.match(re)) {
+    console.log("invalid input");
+    alert("Invalid time format. Please use hh:mm");
+  } else if (DOMSelectors.input.value.match(re)) {
+    DOMSelectors.timeDiv.innerHTML =
+      '<span class="time-labels" id="hours"></span>:<span class="time-labels" id="minutes"></span>:<span class="time-labels" id="seconds"></span>';
 
-      let regs = DOMSelectors.input.value.match(re);
-      let newHour = regs[1];
-      let newMinute = regs[2];
-      holder.switch = true;
-      console.log(`pretty valid input: ${DOMSelectors.input.value}`);
+    let regs = DOMSelectors.input.value.match(re);
+    let newHour = regs[1];
+    let newMinute = regs[2];
+    console.log(`pretty valid input: ${DOMSelectors.input.value}`);
 
-      window.time = {
-        hour: parseInt(newHour),
-        minute: parseInt(newMinute),
-        second: 0,
-      };
+    window.time = {
+      hour: parseInt(newHour),
+      minute: parseInt(newMinute),
+      second: 0,
+    };
 
-      console.log(window.time);
+    console.log(window.time);
 
-      checkTime();
-    }
-
-    DOMSelectors.input.value = "";
-  });
-}
+    checkTime();
+  }
+});
 
 //add 0 if one digit number
 function pad(val) {
@@ -134,15 +126,17 @@ async function displayTime() {
 
   await sleep(1000);
 }
-
+holder.switch = 0;
 //loop display
 function updateDisplay() {
-  while ((holder.switch = true)) {
+  while (holder.switch < 5) {
     displayTime();
-    submit();
+
+    holder.switch++;
   }
 }
 updateDisplay();
+console.log(holder.switch);
 
 //insert music display HTML
 function insertDaMusic(hour) {
