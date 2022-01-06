@@ -11,7 +11,10 @@ const DOMSelectors = {
   purple: document.getElementById("purple"),
   blue: document.getElementById("blue"),
 };
-let arr = {};
+let holder = {
+  switch: false,
+};
+
 window.time = {
   hour: "",
   minute: "",
@@ -23,9 +26,9 @@ async function getData(URL) {
   try {
     const response = await fetch(URL);
     const data = await response.json();
-    arr = Object.keys(data).map((key) => data[key]);
-    console.log(arr);
-    return arr;
+    holder.arr = Object.keys(data).map((key) => data[key]);
+    console.log(holder.arr);
+    return holder.arr;
   } catch (error) {
     console.log(error);
   }
@@ -47,6 +50,7 @@ DOMSelectors.form.addEventListener("submit", (e) => {
     let regs = DOMSelectors.input.value.match(re);
     let newHour = regs[1];
     let newMinute = regs[2];
+    holder.switch = true;
 
     console.log(`pretty valid input: ${DOMSelectors.input.value}`);
 
@@ -58,7 +62,7 @@ DOMSelectors.form.addEventListener("submit", (e) => {
 
     console.log(window.time);
 
-    displayTime();
+    updateDisplay();
     checkTime();
   }
 
@@ -133,9 +137,18 @@ async function displayTime() {
   displayTime();
 }
 
+//pls loop and kill
+function updateDisplay() {
+  if (holder.switch === true) {
+    displayTime();
+  } else {
+    return;
+  }
+}
+
 //insert music display HTML
 function insertDaMusic(hour) {
-  const currentFile = arr.filter((song) => song.id === hour);
+  const currentFile = holder.arr.filter((song) => song.id === hour);
   if (DOMSelectors.displayDiv.innerHTML == "") {
     DOMSelectors.displayDiv.insertAdjacentHTML(
       "afterbegin",
