@@ -43,14 +43,11 @@ DOMSelectors.form.addEventListener("submit", (e) => {
   if (DOMSelectors.input.value != "" && !DOMSelectors.input.value.match(re)) {
     console.log("invalid input");
     alert("Invalid time format. Please use hh:mm");
+    DOMSelectors.input.value = "";
   } else if (DOMSelectors.input.value.match(re)) {
-    DOMSelectors.timeDiv.innerHTML =
-      '<span class="time-labels" id="hours"></span>:<span class="time-labels" id="minutes"></span>:<span class="time-labels" id="seconds"></span>';
-
     let regs = DOMSelectors.input.value.match(re);
     let newHour = regs[1];
     let newMinute = regs[2];
-    holder.switch = true;
 
     console.log(`pretty valid input: ${DOMSelectors.input.value}`);
 
@@ -61,13 +58,23 @@ DOMSelectors.form.addEventListener("submit", (e) => {
     };
 
     console.log(window.time);
+    DOMSelectors.input.value = "";
 
     updateDisplay();
     checkTime();
+    console.log(
+      DOMSelectors.input.value,
+      DOMSelectors.displayDiv.innerHTML,
+      holder.switch
+    );
   }
-
-  DOMSelectors.input.value = "";
 });
+
+if (DOMSelectors.displayDiv.innerHTML === "") {
+  holder.switch = false;
+} else if (DOMSelectors.displayDiv.innerHTML != "") {
+  holder.switch = true;
+}
 
 //add 0 if one digit number
 function pad(val) {
@@ -140,6 +147,8 @@ async function displayTime() {
 //pls loop and kill
 function updateDisplay() {
   if (holder.switch === true) {
+    DOMSelectors.timeDiv.innerHTML =
+      '<span class="time-labels" id="hours"></span>:<span class="time-labels" id="minutes"></span>:<span class="time-labels" id="seconds"></span>';
     displayTime();
   } else {
     return;
