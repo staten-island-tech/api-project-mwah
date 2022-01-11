@@ -39,6 +39,9 @@ getData(bgm);
 DOMSelectors.form.addEventListener("submit", (e) => {
   e.preventDefault();
   let re = /^(\d{1,2}):(\d{2})?$/;
+  holder.switch = false;
+  updateDisplay();
+  console.log(holder.switch);
 
   if (DOMSelectors.input.value != "" && !DOMSelectors.input.value.match(re)) {
     console.log("invalid input");
@@ -59,9 +62,10 @@ DOMSelectors.form.addEventListener("submit", (e) => {
 
     console.log(window.time);
     DOMSelectors.input.value = "";
-
+    on();
     updateDisplay();
     checkTime();
+
     console.log(
       DOMSelectors.input.value,
       DOMSelectors.displayDiv.innerHTML,
@@ -70,10 +74,14 @@ DOMSelectors.form.addEventListener("submit", (e) => {
   }
 });
 
-if (DOMSelectors.displayDiv.innerHTML === "") {
+/* if (DOMSelectors.displayDiv.innerHTML === "") {
   holder.switch = false;
-} else if (DOMSelectors.displayDiv.innerHTML != "") {
+} else if (DOMSelectors.displayDiv.innerHTML !== "") {
   holder.switch = true;
+} */
+
+function on() {
+  return (holder.switch = true);
 }
 
 //add 0 if one digit number
