@@ -39,38 +39,47 @@ getData(bgm);
 DOMSelectors.form.addEventListener("submit", (e) => {
   e.preventDefault();
   let re = /^(\d{1,2}):(\d{2})?$/;
-  holder.switch = false;
-  updateDisplay();
-  console.log(holder.switch);
 
   if (DOMSelectors.input.value != "" && !DOMSelectors.input.value.match(re)) {
     console.log("invalid input");
     alert("Invalid time format. Please use hh:mm");
     DOMSelectors.input.value = "";
   } else if (DOMSelectors.input.value.match(re)) {
-    let regs = DOMSelectors.input.value.match(re);
-    let newHour = regs[1];
-    let newMinute = regs[2];
+    async function runThings() {
+      try {
+        let regs = DOMSelectors.input.value.match(re);
+        let newHour = regs[1];
+        let newMinute = regs[2];
 
-    console.log(`pretty valid input: ${DOMSelectors.input.value}`);
+        console.log(`pretty valid input: ${DOMSelectors.input.value}`);
 
-    window.time = {
-      hour: parseInt(newHour),
-      minute: parseInt(newMinute),
-      second: 0,
-    };
+        window.time = {
+          hour: parseInt(newHour),
+          minute: parseInt(newMinute),
+          second: 0,
+        };
 
-    console.log(window.time);
-    DOMSelectors.input.value = "";
-    on();
-    updateDisplay();
-    checkTime();
+        console.log(window.time);
+        DOMSelectors.input.value = "";
 
-    console.log(
-      DOMSelectors.input.value,
-      DOMSelectors.displayDiv.innerHTML,
-      holder.switch
-    );
+        let off = await off();
+        let end = await updateDisplay();
+
+        console.log(holder.switch);
+        on();
+        updateDisplay();
+        checkTime();
+
+        console.log(
+          DOMSelectors.input.value,
+          DOMSelectors.displayDiv.innerHTML,
+          holder.switch
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    runThings();
   }
 });
 
@@ -82,6 +91,9 @@ DOMSelectors.form.addEventListener("submit", (e) => {
 
 function on() {
   return (holder.switch = true);
+}
+function off() {
+  return (holder.switch = false);
 }
 
 //add 0 if one digit number
