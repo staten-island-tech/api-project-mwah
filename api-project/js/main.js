@@ -34,14 +34,16 @@ async function getData(URL) {
   }
 }
 getData(bgm);
-
+let stopTime = false;
 //when submit form - check valid format, set time, run display and check, clear input field
+const change = document.getElementById("change");
+change.addEventListener("click", function () {
+  stopTime = true;
+  return stopTime;
+});
 DOMSelectors.form.addEventListener("submit", (e) => {
   e.preventDefault();
   let re = /^(\d{1,2}):(\d{2})?$/;
-  holder.switch = false;
-  updateDisplay();
-  console.log(holder.switch);
 
   if (DOMSelectors.input.value != "" && !DOMSelectors.input.value.match(re)) {
     console.log("invalid input");
@@ -63,6 +65,7 @@ DOMSelectors.form.addEventListener("submit", (e) => {
     console.log(window.time);
     DOMSelectors.input.value = "";
     on();
+    stopTime = false;
     updateDisplay();
     checkTime();
 
@@ -146,21 +149,18 @@ async function displayTime() {
   labels.secondsLabel.innerHTML = pad(window.time.second);
   labels.minutesLabel.innerHTML = pad(minutesPad(window.time.minute));
   labels.hoursLabel.innerHTML = pad(hoursPad(window.time.hour));
-
-  await sleep(1000);
-
-  displayTime();
 }
 
 //pls loop and kill
 function updateDisplay() {
-  if (holder.switch === true) {
+  if (stopTime == false) {
     DOMSelectors.timeDiv.innerHTML =
       '<span class="time-labels" id="hours"></span>:<span class="time-labels" id="minutes"></span>:<span class="time-labels" id="seconds"></span>';
     displayTime();
   } else {
     return;
   }
+  setTimeout(updateDisplay, 1000);
 }
 
 //insert music display HTML
