@@ -62,8 +62,8 @@ DOMSelectors.form.addEventListener("submit", (e) => {
         console.log(window.time);
         DOMSelectors.input.value = "";
 
-        let off = await off();
-        let end = await updateDisplay();
+        off();
+        updateDisplay();
 
         console.log(holder.switch);
         on();
