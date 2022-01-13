@@ -10,11 +10,11 @@ const DOMSelectors = {
   input: document.getElementById("time-form-input"),
   purple: document.getElementById("purple"),
   blue: document.getElementById("blue"),
+  change: document.getElementById("change"),
+  formDiv: document.getElementById("form-div"),
 };
-let holder = {
-  switch: false,
-};
-
+let arr = {};
+let stopTime = false;
 window.time = {
   hour: "",
   minute: "",
@@ -26,21 +26,16 @@ async function getData(URL) {
   try {
     const response = await fetch(URL);
     const data = await response.json();
-    holder.arr = Object.keys(data).map((key) => data[key]);
-    console.log(holder.arr);
-    return holder.arr;
+    arr = Object.keys(data).map((key) => data[key]);
+    console.log(arr);
+    return arr;
   } catch (error) {
     console.log(error);
   }
 }
 getData(bgm);
-let stopTime = false;
-//when submit form - check valid format, set time, run display and check, clear input field
-const change = document.getElementById("change");
-change.addEventListener("click", function () {
-  stopTime = true;
-  return stopTime;
-});
+
+//when submit form - check valid format, set window time, set variable to false to update time, run check time, remove form
 DOMSelectors.form.addEventListener("submit", (e) => {
   e.preventDefault();
   let re = /^(\d{1,2}):(\d{2})?$/;
@@ -61,31 +56,26 @@ DOMSelectors.form.addEventListener("submit", (e) => {
       minute: parseInt(newMinute),
       second: 0,
     };
-
     console.log(window.time);
-    DOMSelectors.input.value = "";
-    on();
+
     stopTime = false;
     updateDisplay();
     checkTime();
 
-    console.log(
-      DOMSelectors.input.value,
-      DOMSelectors.displayDiv.innerHTML,
-      holder.switch
-    );
+    DOMSelectors.formDiv.innerHTML = "";
   }
 });
 
-/* if (DOMSelectors.displayDiv.innerHTML === "") {
-  holder.switch = false;
-} else if (DOMSelectors.displayDiv.innerHTML !== "") {
-  holder.switch = true;
-} */
-
-function on() {
-  return (holder.switch = true);
-}
+//button: stop time running and insert form
+DOMSelectors.change.addEventListener("click", function () {
+  DOMSelectors.formDiv.innerHTML = `<form id="time-form">
+  <label for="time-form-input" id="time-form-label">Set Time</label>
+  <input type="text" name="time-input" id="time-form-input">
+</form>
+<p id="info">Please use 24-hour hh:mm time format! Thank you :)</p>`;
+  stopTime = true;
+  return stopTime;
+});
 
 //add 0 if one digit number
 function pad(val) {
@@ -153,7 +143,7 @@ async function displayTime() {
 
 //pls loop and kill
 function updateDisplay() {
-  if (stopTime == false) {
+  if (stopTime === false) {
     DOMSelectors.timeDiv.innerHTML =
       '<span class="time-labels" id="hours"></span>:<span class="time-labels" id="minutes"></span>:<span class="time-labels" id="seconds"></span>';
     displayTime();
@@ -165,7 +155,7 @@ function updateDisplay() {
 
 //insert music display HTML
 function insertDaMusic(hour) {
-  const currentFile = holder.arr.filter((song) => song.id === hour);
+  const currentFile = arr.filter((song) => song.id === hour);
   if (DOMSelectors.displayDiv.innerHTML == "") {
     DOMSelectors.displayDiv.insertAdjacentHTML(
       "afterbegin",
@@ -173,7 +163,6 @@ function insertDaMusic(hour) {
       <div id="display-img">
         <div id = "display-img-container">
         </div>
-      </div>
       <div id="display-text">
         <div id="display-text-container">
           <p id="text-main">Now playing: </p> 
