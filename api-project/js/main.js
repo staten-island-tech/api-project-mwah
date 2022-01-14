@@ -11,8 +11,10 @@ const DOMSelectors = {
   purple: document.getElementById("purple"),
   blue: document.getElementById("blue"),
 };
+let holder = {
+  switch: false,
+};
 
-let holder = {};
 window.time = {
   hour: "",
   minute: "",
@@ -37,14 +39,15 @@ getData(bgm);
 DOMSelectors.form.addEventListener("submit", (e) => {
   e.preventDefault();
   let re = /^(\d{1,2}):(\d{2})?$/;
+  holder.switch = false;
+  updateDisplay();
+  console.log(holder.switch);
 
   if (DOMSelectors.input.value != "" && !DOMSelectors.input.value.match(re)) {
     console.log("invalid input");
     alert("Invalid time format. Please use hh:mm");
+    DOMSelectors.input.value = "";
   } else if (DOMSelectors.input.value.match(re)) {
-    DOMSelectors.timeDiv.innerHTML =
-      '<span class="time-labels" id="hours"></span>:<span class="time-labels" id="minutes"></span>:<span class="time-labels" id="seconds"></span>';
-
     let regs = DOMSelectors.input.value.match(re);
     let newHour = regs[1];
     let newMinute = regs[2];
@@ -58,13 +61,28 @@ DOMSelectors.form.addEventListener("submit", (e) => {
     };
 
     console.log(window.time);
-
-    displayTime();
+    DOMSelectors.input.value = "";
+    on();
+    updateDisplay();
     checkTime();
-  }
 
-  DOMSelectors.input.value = "";
+    console.log(
+      DOMSelectors.input.value,
+      DOMSelectors.displayDiv.innerHTML,
+      holder.switch
+    );
+  }
 });
+
+/* if (DOMSelectors.displayDiv.innerHTML === "") {
+  holder.switch = false;
+} else if (DOMSelectors.displayDiv.innerHTML !== "") {
+  holder.switch = true;
+} */
+
+function on() {
+  return (holder.switch = true);
+}
 
 //add 0 if one digit number
 function pad(val) {
@@ -132,6 +150,17 @@ async function displayTime() {
   await sleep(1000);
 
   displayTime();
+}
+
+//pls loop and kill
+function updateDisplay() {
+  if (holder.switch === true) {
+    DOMSelectors.timeDiv.innerHTML =
+      '<span class="time-labels" id="hours"></span>:<span class="time-labels" id="minutes"></span>:<span class="time-labels" id="seconds"></span>';
+    displayTime();
+  } else {
+    return;
+  }
 }
 
 //insert music display HTML
