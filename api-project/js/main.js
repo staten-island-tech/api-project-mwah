@@ -67,43 +67,12 @@ DOMSelectors.form.addEventListener("submit", (e) => {
 });
 
 //button: stop time running and insert form
-DOMSelectors.change.addEventListener("click", function (e) {
+DOMSelectors.change.addEventListener("click", function () {
   DOMSelectors.formDiv.innerHTML = `<form id="time-form">
   <label for="time-form-input" id="time-form-label">Set Time</label>
   <input type="text" name="time-input" id="time-form-input">
 </form>
 <p id="info">Please use 24-hour hh:mm time format! Thank you :)</p>`;
-
-  DOMSelectors.form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    let re = /^(\d{1,2}):(\d{2})?$/;
-
-    if (DOMSelectors.input.value != "" && !DOMSelectors.input.value.match(re)) {
-      console.log("invalid input");
-      alert("Invalid time format. Please use hh:mm");
-      DOMSelectors.input.value = "";
-    } else if (DOMSelectors.input.value.match(re)) {
-      let regs = DOMSelectors.input.value.match(re);
-      let newHour = regs[1];
-      let newMinute = regs[2];
-
-      console.log(`pretty valid input: ${DOMSelectors.input.value}`);
-
-      window.time = {
-        hour: parseInt(newHour),
-        minute: parseInt(newMinute),
-        second: 0,
-      };
-      console.log(window.time);
-
-      stopTime = false;
-      updateDisplay();
-      checkTime();
-
-      DOMSelectors.formDiv.innerHTML = "";
-    }
-  });
-
   stopTime = true;
   return stopTime;
 });
