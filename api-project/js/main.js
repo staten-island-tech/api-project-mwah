@@ -14,7 +14,7 @@ const DOMSelectors = {
   formDiv: document.getElementById("form-div"),
 };
 let arr = {};
-let stopTime = false;
+let stopTime = true;
 window.time = {
   hour: "",
   minute: "",
@@ -58,6 +58,8 @@ DOMSelectors.form.addEventListener("submit", (e) => {
     };
     console.log(window.time);
 
+    DOMSelectors.input.value = "";
+
     stopTime = false;
     updateDisplay();
     checkTime();
@@ -67,12 +69,14 @@ DOMSelectors.form.addEventListener("submit", (e) => {
 });
 
 //button: stop time running and insert form
-DOMSelectors.change.addEventListener("click", function (e) {
+DOMSelectors.change.addEventListener("click", (e) => {
   DOMSelectors.formDiv.innerHTML = `<form id="time-form">
   <label for="time-form-input" id="time-form-label">Set Time</label>
   <input type="text" name="time-input" id="time-form-input">
 </form>
 <p id="info">Please use 24-hour hh:mm time format! Thank you :)</p>`;
+
+  stopTime = true;
 
   DOMSelectors.form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -96,6 +100,8 @@ DOMSelectors.change.addEventListener("click", function (e) {
       };
       console.log(window.time);
 
+      DOMSelectors.input.value = "";
+
       stopTime = false;
       updateDisplay();
       checkTime();
@@ -103,9 +109,6 @@ DOMSelectors.change.addEventListener("click", function (e) {
       DOMSelectors.formDiv.innerHTML = "";
     }
   });
-
-  stopTime = true;
-  return stopTime;
 });
 
 //add 0 if one digit number
