@@ -6,7 +6,7 @@ const bgm = "https://acnhapi.com/v1/backgroundmusic/";
 const DOMSelectors = {
   displayDiv: document.getElementById("display-div"),
   timeDiv: document.getElementById("time-div"),
-  form: document.querySelectorAll("#time-form"),
+  form: document.getElementById("time-form"),
   input: document.getElementById("time-form-input"),
   purple: document.getElementById("purple"),
   blue: document.getElementById("blue"),
@@ -36,39 +36,37 @@ async function getData(URL) {
 getData(bgm);
 
 //when submit form - check valid format, set time, run display and check, clear input field
-DOMSelectors.form.forEach((form) => {
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    let re = /^(\d{1,2}):(\d{2})?$/;
-    if (DOMSelectors.input.value != "" && !DOMSelectors.input.value.match(re)) {
-      console.log("invalid input");
-      alert("Invalid time format. Please use hh:mm");
-      DOMSelectors.input.value = "";
-    } else if (DOMSelectors.input.value.match(re)) {
-      let regs = DOMSelectors.input.value.match(re);
-      let newHour = regs[1];
-      let newMinute = regs[2];
-      console.log(`pretty valid input: ${DOMSelectors.input.value}`);
+DOMSelectors.form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  let re = /^(\d{1,2}):(\d{2})?$/;
+  if (DOMSelectors.input.value != "" && !DOMSelectors.input.value.match(re)) {
+    console.log("invalid input");
+    alert("Invalid time format. Please use hh:mm");
+    DOMSelectors.input.value = "";
+  } else if (DOMSelectors.input.value.match(re)) {
+    let regs = DOMSelectors.input.value.match(re);
+    let newHour = regs[1];
+    let newMinute = regs[2];
+    console.log(`pretty valid input: ${DOMSelectors.input.value}`);
 
-      window.time = {
-        hour: parseInt(newHour),
-        minute: parseInt(newMinute),
-        second: 0,
-      };
+    window.time = {
+      hour: parseInt(newHour),
+      minute: parseInt(newMinute),
+      second: 0,
+    };
 
-      console.log(window.time);
+    console.log(window.time);
 
-      DOMSelectors.input.value = "";
+    DOMSelectors.input.value = "";
 
-      stopTime = false;
-      updateDisplay();
-      checkTime();
+    stopTime = false;
+    updateDisplay();
+    checkTime();
 
-      DOMSelectors.buttonDiv.innerHTML = `<button class="change">Change Time</button>`;
-      why();
-      DOMSelectors.formDiv.innerHTML = "";
-    }
-  });
+    DOMSelectors.buttonDiv.innerHTML = `<button class="change btn">Change Time</button>`;
+    why();
+    DOMSelectors.formDiv.innerHTML = "";
+  }
 });
 
 function why() {
@@ -83,7 +81,7 @@ function why() {
       stopTime = true;
       DOMSelectors.buttonDiv.innerHTML = "";
 
-      const formDivAll = document.querySelectorAll("#time-form-div");
+      const formDivAll = document.querySelectorAll("#time-form");
       const inputAll = document.querySelectorAll("#time-form-input");
 
       formDivAll.forEach((form) => {
@@ -114,9 +112,9 @@ function why() {
             updateDisplay();
             checkTime();
 
-            DOMSelectors.buttonDiv.innerHTML = `<button class="change">Change Time</button>`;
+            DOMSelectors.buttonDiv.innerHTML = `<button class="change btn">Change Time</button>`;
             why();
-            formDivAll.forEach((form) => (form.innerHTML = ""));
+            DOMSelectors.formDiv.innerHTML = "";
           }
         });
       });
