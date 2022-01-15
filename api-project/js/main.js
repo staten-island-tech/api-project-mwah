@@ -6,14 +6,15 @@ const bgm = "https://acnhapi.com/v1/backgroundmusic/";
 const DOMSelectors = {
   displayDiv: document.getElementById("display-div"),
   timeDiv: document.getElementById("time-div"),
-  form: document.getElementById("time-form"),
+  form: document.querySelectorAll("#time-form"),
   input: document.getElementById("time-form-input"),
   purple: document.getElementById("purple"),
   blue: document.getElementById("blue"),
+  formDiv: document.getElementById("time-form-div"),
+  buttonDiv: document.getElementById("time-button-div"),
 };
-let holder = {
-  switch: false,
-};
+let arr = {};
+let stopTime = true;
 
 window.time = {
   hour: "",
@@ -26,53 +27,103 @@ async function getData(URL) {
   try {
     const response = await fetch(URL);
     const data = await response.json();
-    holder.arr = Object.keys(data).map((key) => data[key]);
-    console.log(holder.arr);
-    return holder.arr;
+    arr = Object.keys(data).map((key) => data[key]);
+    console.log(arr);
+    return arr;
   } catch (error) {
     console.log(error);
   }
 }
 getData(bgm);
-let stopTime = true;
+
 //when submit form - check valid format, set time, run display and check, clear input field
-const change = document.getElementById("change");
-change.addEventListener("click", function () {
-  stopTime = true;
-  return stopTime;
+DOMSelectors.form.forEach((form) => {
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let re = /^(\d{1,2}):(\d{2})?$/;
+    if (DOMSelectors.input.value != "" && !DOMSelectors.input.value.match(re)) {
+      console.log("invalid input");
+      alert("Invalid time format. Please use hh:mm");
+      DOMSelectors.input.value = "";
+    } else if (DOMSelectors.input.value.match(re)) {
+      let regs = DOMSelectors.input.value.match(re);
+      let newHour = regs[1];
+      let newMinute = regs[2];
+      console.log(`pretty valid input: ${DOMSelectors.input.value}`);
+
+      window.time = {
+        hour: parseInt(newHour),
+        minute: parseInt(newMinute),
+        second: 0,
+      };
+
+      console.log(window.time);
+
+      DOMSelectors.input.value = "";
+
+      stopTime = false;
+      updateDisplay();
+      checkTime();
+
+      DOMSelectors.buttonDiv.innerHTML = `<button class="change">Change Time</button>`;
+      why();
+      DOMSelectors.formDiv.innerHTML = "";
+    }
+  });
 });
-DOMSelectors.form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  let re = /^(\d{1,2}):(\d{2})?$/;
-  if (DOMSelectors.input.value != "" && !DOMSelectors.input.value.match(re)) {
-    console.log("invalid input");
-    alert("Invalid time format. Please use hh:mm");
-    DOMSelectors.input.value = "";
-  } else if (DOMSelectors.input.value.match(re)) {
-    let regs = DOMSelectors.input.value.match(re);
-    let newHour = regs[1];
-    let newMinute = regs[2];
-    console.log(`pretty valid input: ${DOMSelectors.input.value}`);
 
-    window.time = {
-      hour: parseInt(newHour),
-      minute: parseInt(newMinute),
-      second: 0,
-    };
+function why() {
+  document.querySelectorAll(".change").forEach((button) => {
+    button.addEventListener("click", () => {
+      DOMSelectors.formDiv.innerHTML = `<form id="time-form">
+  <label for="time-form-input" id="time-form-label">Set Time</label>
+  <input type="text" name="time-input" id="time-form-input">
+</form>
+<p id="info">Please use 24-hour hh:mm time format! Thank you :)</p>`;
 
-    console.log(window.time);
-    DOMSelectors.input.value = "";
-    stopTime = false;
-    updateDisplay();
-    checkTime();
+      stopTime = true;
+      DOMSelectors.buttonDiv.innerHTML = "";
 
-    console.log(
-      DOMSelectors.input.value,
-      DOMSelectors.displayDiv.innerHTML,
-      holder.switch
-    );
-  }
-});
+      const formDivAll = document.querySelectorAll("#time-form-div");
+      const inputAll = document.querySelectorAll("#time-form-input");
+
+      formDivAll.forEach((form) => {
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          let re = /^(\d{1,2}):(\d{2})?$/;
+          if (inputAll[0].value != "" && !inputAll[0].value.match(re)) {
+            console.log("invalid input");
+            alert("Invalid time format. Please use hh:mm");
+            inputAll.forEach((input) => (input.value = ""));
+          } else if (inputAll[0].value.match(re)) {
+            let regs = inputAll[0].value.match(re);
+            let newHour = regs[1];
+            let newMinute = regs[2];
+            console.log(`pretty valid input: ${inputAll[0].value}`);
+
+            window.time = {
+              hour: parseInt(newHour),
+              minute: parseInt(newMinute),
+              second: 0,
+            };
+
+            console.log(window.time);
+
+            inputAll.forEach((input) => (input.value = ""));
+
+            stopTime = false;
+            updateDisplay();
+            checkTime();
+
+            DOMSelectors.buttonDiv.innerHTML = `<button class="change">Change Time</button>`;
+            why();
+            formDivAll.forEach((form) => (form.innerHTML = ""));
+          }
+        });
+      });
+    });
+  });
+}
 
 //add 0 if one digit number
 function pad(val) {
@@ -150,11 +201,10 @@ function updateDisplay() {
   setTimeout(updateDisplay, 1000);
 }
 updateDisplay();
-console.log(holder.switch);
 
 //insert music display HTML
 function insertDaMusic(hour) {
-  const currentFile = holder.arr.filter((song) => song.id === hour);
+  const currentFile = arr.filter((song) => song.id === hour);
   if (DOMSelectors.displayDiv.innerHTML == "") {
     DOMSelectors.displayDiv.insertAdjacentHTML(
       "afterbegin",
