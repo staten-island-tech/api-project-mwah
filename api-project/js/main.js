@@ -11,8 +11,10 @@ const DOMSelectors = {
   purple: document.getElementById("purple"),
   blue: document.getElementById("blue"),
 };
+let holder = {
+  switch: false,
+};
 
-let holder = {};
 window.time = {
   hour: "",
   minute: "",
@@ -32,18 +34,21 @@ async function getData(URL) {
   }
 }
 getData(bgm);
-
+let stopTime = false;
 //when submit form - check valid format, set time, run display and check, clear input field
+const change = document.getElementById("change");
+change.addEventListener("click", function () {
+  stopTime = true;
+  return stopTime;
+});
 DOMSelectors.form.addEventListener("submit", (e) => {
   e.preventDefault();
   let re = /^(\d{1,2}):(\d{2})?$/;
   if (DOMSelectors.input.value != "" && !DOMSelectors.input.value.match(re)) {
     console.log("invalid input");
     alert("Invalid time format. Please use hh:mm");
+    DOMSelectors.input.value = "";
   } else if (DOMSelectors.input.value.match(re)) {
-    DOMSelectors.timeDiv.innerHTML =
-      '<span class="time-labels" id="hours"></span>:<span class="time-labels" id="minutes"></span>:<span class="time-labels" id="seconds"></span>';
-
     let regs = DOMSelectors.input.value.match(re);
     let newHour = regs[1];
     let newMinute = regs[2];
@@ -56,10 +61,29 @@ DOMSelectors.form.addEventListener("submit", (e) => {
     };
 
     console.log(window.time);
-
+    DOMSelectors.input.value = "";
+    on();
+    stopTime = false;
+    updateDisplay();
     checkTime();
+
+    console.log(
+      DOMSelectors.input.value,
+      DOMSelectors.displayDiv.innerHTML,
+      holder.switch
+    );
   }
 });
+
+/* if (DOMSelectors.displayDiv.innerHTML === "") {
+  holder.switch = false;
+} else if (DOMSelectors.displayDiv.innerHTML !== "") {
+  holder.switch = true;
+} */
+
+function on() {
+  return (holder.switch = true);
+}
 
 //add 0 if one digit number
 function pad(val) {
@@ -123,17 +147,18 @@ async function displayTime() {
   labels.secondsLabel.innerHTML = pad(window.time.second);
   labels.minutesLabel.innerHTML = pad(minutesPad(window.time.minute));
   labels.hoursLabel.innerHTML = pad(hoursPad(window.time.hour));
-
-  await sleep(1000);
 }
-holder.switch = 0;
-//loop display
-function updateDisplay() {
-  while (holder.switch < 5) {
-    displayTime();
 
-    holder.switch++;
+//pls loop and kill
+function updateDisplay() {
+  if (stopTime == false) {
+    DOMSelectors.timeDiv.innerHTML =
+      '<span class="time-labels" id="hours"></span>:<span class="time-labels" id="minutes"></span>:<span class="time-labels" id="seconds"></span>';
+    displayTime();
+  } else {
+    return;
   }
+  setTimeout(updateDisplay, 1000);
 }
 updateDisplay();
 console.log(holder.switch);
