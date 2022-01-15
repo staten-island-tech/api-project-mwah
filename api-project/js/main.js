@@ -15,6 +15,7 @@ const DOMSelectors = {
 };
 let arr = {};
 let stopTime = true;
+
 window.time = {
   hour: "",
   minute: "",
@@ -69,6 +70,7 @@ DOMSelectors.form.addEventListener("submit", (e) => {
   }
 });
 
+//change time button: inserts form, stops time, removes button, add form event listener
 function why() {
   document.querySelectorAll(".change").forEach((button) => {
     button.addEventListener("click", () => {
