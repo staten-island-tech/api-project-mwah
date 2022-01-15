@@ -34,7 +34,7 @@ async function getData(URL) {
   }
 }
 getData(bgm);
-let stopTime = false;
+let stopTime = true;
 //when submit form - check valid format, set time, run display and check, clear input field
 const change = document.getElementById("change");
 change.addEventListener("click", function () {
@@ -62,7 +62,6 @@ DOMSelectors.form.addEventListener("submit", (e) => {
 
     console.log(window.time);
     DOMSelectors.input.value = "";
-    on();
     stopTime = false;
     updateDisplay();
     checkTime();
@@ -74,16 +73,6 @@ DOMSelectors.form.addEventListener("submit", (e) => {
     );
   }
 });
-
-/* if (DOMSelectors.displayDiv.innerHTML === "") {
-  holder.switch = false;
-} else if (DOMSelectors.displayDiv.innerHTML !== "") {
-  holder.switch = true;
-} */
-
-function on() {
-  return (holder.switch = true);
-}
 
 //add 0 if one digit number
 function pad(val) {
