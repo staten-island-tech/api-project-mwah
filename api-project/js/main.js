@@ -221,7 +221,7 @@ function insertDaMusic(hour) {
     </div>
       <div id="display-bgm"> <audio
         controls autoplay loop
-        src="https://acnhapi.com/v1/hourly/${hour}" alt="Background Music Audio File">
+        src="https://acnhapi.com/v1a/hourly/${hour}" alt="Background Music Audio File">
         </audio></div>
      `
     );
@@ -243,7 +243,7 @@ function insertDaMusic(hour) {
     </div>
       <div id="display-bgm"> <audio
         controls autoplay loop
-        src="https://acnhapi.com/v1/hourly/${hour}" alt="Background Music Audio File">
+        src="https://acnhapi.com/v1a/hourly/${hour}" alt="Background Music Audio File">
         </audio></div>
      `
     );
