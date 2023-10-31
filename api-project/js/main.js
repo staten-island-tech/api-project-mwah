@@ -2,7 +2,7 @@ import "../styles/style.css";
 import { updateDaMusic } from "./update";
 
 //variables
-const bgm = "https://acnhapi.com/v1/backgroundmusic/";
+const bgm = "https://acnhapi.com/v1a/backgroundmusic/";
 const DOMSelectors = {
   displayDiv: document.getElementById("display-div"),
   timeDiv: document.getElementById("time-div"),
